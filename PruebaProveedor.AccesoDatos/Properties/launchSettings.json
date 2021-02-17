@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "PruebaProveedor.AccesoDatos": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ConexionDB": "Server=DESKTOP-DLI2VFH;Database=PruebaProveedores;Trusted_Connection=True;"
+      }
+    }
+  }
+}

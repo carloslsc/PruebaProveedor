@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using PruebaProveedor.Models;
+using PruebaProveedor.Modelos;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

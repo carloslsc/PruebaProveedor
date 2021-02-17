@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PruebaProveedor.AccesoDatos.Data;
+using PruebaProveedor.AccesoDatos.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +26,20 @@ namespace PruebaProveedor
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+
+            services.AddDbContext<PruebaProveedoresContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IContenedorTrabajo, ContenedorTrabajo>();
+
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            services.AddRazorPages();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +66,7 @@ namespace PruebaProveedor
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Proveedor}/{action=Index}/{id?}");
             });
         }
     }

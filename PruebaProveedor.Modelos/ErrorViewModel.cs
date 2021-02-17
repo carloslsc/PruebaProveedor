@@ -1,6 +1,6 @@
 using System;
 
-namespace PruebaProveedor.Models
+namespace PruebaProveedor.Modelos
 {
     public class ErrorViewModel
     {
